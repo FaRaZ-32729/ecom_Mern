@@ -26,11 +26,11 @@ const Navbar = () => {
               <NavLink to="/men" ><li>Men</li></NavLink>
               <NavLink to="/women" ><li>Women</li></NavLink>
               <NavLink to="/kids" ><li>Kids</li></NavLink>
-              <button onClick={() => user ? ShowConfirmationToast(setUser, navigate) : navigate("/login")} className="bg-red-500 flex items-center gap-2 text-white px-4 py-1 rounded-md ">
+              <button onClick={() => user ? ShowConfirmationToast(setUser, navigate) : navigate("/login")} className="bg-red-500 flex items-center  gap-2 text-white px-4 py-1 rounded-md ">
                 {user ? user.name : "login"}
                 {
                   user && (
-                    <img src="./public/assets/logout.svg" alt="" className='h-4 invert' />
+                    <img src="./public/assets/logout.svg" alt="" className='h-5 invert' />
                   )
                 }
               </button>
