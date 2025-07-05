@@ -1,13 +1,16 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import ShopContextProvider from './context/ShopContext.jsx'
+import { BrowserRouter } from 'react-router-dom'
+import UserContextProvider from './context/UserContextProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <ShopContextProvider>
-    <App />
-    </ShopContextProvider>
-  </StrictMode>,
+  <BrowserRouter>
+    <UserContextProvider>
+      <ShopContextProvider>
+        <App />
+      </ShopContextProvider>
+    </UserContextProvider>
+  </BrowserRouter>,
 )

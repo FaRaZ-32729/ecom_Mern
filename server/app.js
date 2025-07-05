@@ -1,6 +1,7 @@
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
 import profile from './routes/protectedRoute.js'
+import cors from 'cors'
 import express from "express";
 import cookieparser from 'cookie-parser'
 import "dotenv/config";
@@ -15,6 +16,10 @@ db_Connection();
 //middleWares
 app.use(express.json());
 app.use(cookieparser());
+app.use(cors({
+    origin : "http://localhost:5173",
+    credentials : true
+}));
 
 
 //Routes

@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ShoppingCart } from 'lucide-react'
 import { HiMenuAlt1, HiMenuAlt3 } from 'react-icons/hi'
 import Menu from './Menu'
+import UserContext from '../../context/UserContext'
+import ShowConfirmationToast from '../ShowConfirmationToast'
 const Navbar = () => {
+  const { user, setUser } = useContext(UserContext);
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
 
   const toggle = () => {
     setShowMenu(!showMenu);
@@ -22,7 +26,14 @@ const Navbar = () => {
               <NavLink to="/men" ><li>Men</li></NavLink>
               <NavLink to="/women" ><li>Women</li></NavLink>
               <NavLink to="/kids" ><li>Kids</li></NavLink>
-              <NavLink to="/login" ><button className="bg-red-500 text-white px-4 py-1 rounded-md ">Login</button></NavLink>
+              <button onClick={() => user ? ShowConfirmationToast(setUser, navigate) : navigate("/login")} className="bg-red-500 flex items-center gap-2 text-white px-4 py-1 rounded-md ">
+                {user ? user.name : "login"}
+                {
+                  user && (
+                    <img src="./public/assets/logout.svg" alt="" className='h-4 invert' />
+                  )
+                }
+              </button>
             </ul>
           </nav>
           <NavLink to="/cart" className="relative w-10" >
