@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
@@ -13,12 +13,18 @@ import DetailPage from './components/DetailPage';
 import Registration from './pages/Registration';
 import AppLayout from './components/AppLayout';
 import { ToastContainer } from 'react-toastify';
+import AdminLayout from './pages/admin/AdminLayout';
+import Dashboard from './pages/admin/Dashboard';
+import AddRoom from './pages/admin/AddRoom';
+import ListRoom from './pages/admin/ListRoom';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  const isAdmin = useLocation().pathname.includes("admin");
   return (
     <>
       <ToastContainer position='top-right' />
+      {!isAdmin && <Navbar />}
       <Routes>
         <Route path='/' element={<AppLayout />}>
           <Route index element={<Home />} />
@@ -27,6 +33,11 @@ const App = () => {
           <Route path="kids" element={<Kids />} />
           <Route path="cart" element={<Cart />} />
           <Route path="product/:productId" element={<DetailPage />} />
+        </Route>
+        <Route path='/admin' element={<AdminLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path='add-room' element={<AddRoom />} />
+          <Route path='all-rooms' element={<ListRoom />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
