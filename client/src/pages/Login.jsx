@@ -30,7 +30,12 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${URL}/auth`, loginData, { withCredentials: true });
-      toast.success(response.data.msg && navigate("/"));
+      toast.success(response.data.msg, {
+        onClose: () => {
+          response.data.existingUser.role === "admin" ? navigate("/admin") : navigate("/");
+        },
+        autoClose: 500
+      });
       setUser(response.data.existingUser)
       console.log(response);
     } catch (error) {

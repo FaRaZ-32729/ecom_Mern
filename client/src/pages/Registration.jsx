@@ -1,10 +1,12 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react'
 import axios from 'axios'
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
 const URL = import.meta.env.VITE_Node_Api_Url;
 
 const Registration = () => {
+    const navigate = useNavigate();
     const [showPass, setShowPass] = useState(false);
     const togglePass = () => {
         setShowPass(!showPass)
@@ -27,7 +29,12 @@ const Registration = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`${URL}/user`, registrationData);
-            toast.success(response.data.msg);
+            toast.success(response.data.msg, {
+                onClose: () => {
+                    navigate("/login")
+                },
+                autoClose: 500
+            });
             console.log(response);
         } catch (error) {
             console.log(error.message);

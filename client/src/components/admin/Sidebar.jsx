@@ -1,14 +1,11 @@
 import React from 'react'
-// import dashboard from '../src/assets/dashboard.svg';
-// import list from '../assets/list.svg';
-// import add from '../assets/add.svg';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
     const SideBarLinks = [
         { name: "Dashboard", path: "/admin", icon: "../public/assets/dashboard.svg" },
-        { name: "Add-Room", path: "/admin/add-room", icon: "../public/assets/add.svg" },
-        { name: "All-Rooms", path: "/admin/all-rooms", icon: "../public/assets/list.svg" },
+        { name: "Add-Product", path: "/admin/add-product", icon: "../public/assets/add.svg" },
+        { name: "All-Products", path: "/admin/all-products", icon: "../public/assets/list.svg" },
     ]
 
     return (

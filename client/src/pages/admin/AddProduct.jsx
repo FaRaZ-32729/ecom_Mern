@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Title from '../../components/Title';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+const URl = import.meta.env.VITE_Node_Api_Url;
 
 const AddProduct = () => {
     const [image, setImage] = useState(null);
@@ -19,9 +22,38 @@ const AddProduct = () => {
         },
     });
 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const formData = new FormData();
+            formData.append('name', inputs.name);
+            formData.append('smallDescription', inputs.smallDescription);
+            formData.append('detail', inputs.detail);
+            formData.append('starRating', inputs.starRating);
+            formData.append('reviews', inputs.reviews);
+            formData.append('category', inputs.category);
+            formData.append('image', image); // Image file
+
+            // Append sizes
+            formData.append('sizes', JSON.stringify(inputs.sizes));
+
+            const response = await axios.post(`${URl}/products/`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+
+            toast.success(response.data.msg);
+            console.log(response.data);
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.msg || "Error adding product");
+        }
+    };
+
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Title align="left" title="Add Product" subTitle="Start adding details to showcase your new clothing item." />
 
                 {/* Image Upload */}

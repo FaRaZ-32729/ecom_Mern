@@ -15,8 +15,8 @@ import AppLayout from './components/AppLayout';
 import { ToastContainer } from 'react-toastify';
 import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
-import AddRoom from './pages/admin/AddRoom';
-import ListRoom from './pages/admin/ListRoom';
+import AddProduct from './pages/admin/AddProduct';
+import ListProducts from './pages/admin/ListProducts';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -36,8 +36,8 @@ const App = () => {
         </Route>
         <Route path='/admin' element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
-          <Route path='add-room' element={<AddRoom />} />
-          <Route path='all-rooms' element={<ListRoom />} />
+          <Route path='add-product' element={<AddProduct />} />
+          <Route path='all-products' element={<ListProducts />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
