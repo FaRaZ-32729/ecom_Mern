@@ -14,6 +14,7 @@ const AddProduct = () => {
         detail: '',
         starRating: 0,
         reviews: 0,
+        price: 0,
         category: '',
         sizes: {
             S: false,
@@ -35,6 +36,7 @@ const AddProduct = () => {
             formData.append('detail', inputs.detail);
             formData.append('starRating', inputs.starRating);
             formData.append('reviews', inputs.reviews);
+            formData.append('price', inputs.price);
             formData.append('category', inputs.category);
             formData.append('image', image);
             formData.append('sizes', JSON.stringify(inputs.sizes));
@@ -47,7 +49,7 @@ const AddProduct = () => {
                 onClose: () => {
                     navigate('/admin/all-products');
                 },
-                autoClose:500
+                autoClose: 500
             });
 
         } catch (error) {
@@ -101,6 +103,17 @@ const AddProduct = () => {
                         className="border border-gray-300 rounded p-2 w-full mt-1"
                         value={inputs.smallDescription}
                         onChange={e => setInputs({ ...inputs, smallDescription: e.target.value })}
+                    />
+                </div>
+                {/* price */}
+                <div className="mt-4">
+                    <p className="text-gray-800">Price</p>
+                    <input
+                        type="number"
+                        placeholder="Enter product price"
+                        className="border border-gray-300 rounded p-2 w-full mt-1"
+                        value={inputs.price}
+                        onChange={e => setInputs({ ...inputs, price: e.target.value })}
                     />
                 </div>
 

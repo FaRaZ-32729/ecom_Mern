@@ -1,27 +1,28 @@
-  import React, { useContext, useEffect } from 'react'
-  import { ShopContext } from '../context/ShopContext'
-  import { useParams } from 'react-router-dom';
-  import Breadcrum from './Breadcrum';
-  import ProductDisplay from './ProductDisplay';
-  import DescriptionBox from './DescriptionBox';
+import React, { useContext, useEffect } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import { useParams } from 'react-router-dom';
+import Breadcrum from './Breadcrum';
+import ProductDisplay from './ProductDisplay';
+import DescriptionBox from './DescriptionBox';
 
-  const DetailPage = () => {
-    const {newCollections} = useContext(ShopContext);
-    const {productId} = useParams();  
-    const product = newCollections.find((e) => e.id === Number(productId));
-    // console.log(product)
+const DetailPage = () => {
+  const { newCollections } = useContext(ShopContext);
+  const { productId } = useParams();
 
-    useEffect(()=>{
-      window.scrollTo(0,0)
-    },[])
+  const product = newCollections.find((e) => e._id === productId);
+  // console.log(product)
 
-    return (
-      <div className='max-w-7xl mx-auto mb-32 mt-32 '>
-        <Breadcrum product={product} />
-        <ProductDisplay  product={product}  />
-        <DescriptionBox/>
-      </div>
-    )
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-  export default DetailPage
+  return (
+    <div className='max-w-7xl mx-auto mb-32 mt-32'>
+      <Breadcrum product={product} />
+      <ProductDisplay product={product} />
+      <DescriptionBox product={product} />
+    </div>
+  )
+}
+
+export default DetailPage

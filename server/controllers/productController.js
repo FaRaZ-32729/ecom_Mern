@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 export const addProduct = async (req, res) => {
     try {
-        const { name, smallDescription, detail, starRating, reviews, category } = req.body;
+        const { name, smallDescription, detail, price, starRating, reviews, category } = req.body;
         const sizes = JSON.parse(req.body.sizes);
         const picture = req.file ? `/images/${req.file.filename}` : null;
 
@@ -24,6 +24,7 @@ export const addProduct = async (req, res) => {
             detail,
             starRating,
             reviews,
+            price,
             category,
             sizes: sizes,
             imageUrl: picture
@@ -69,6 +70,7 @@ export const updateProduct = async (req, res) => {
             smallDescription: req.body.smallDescription,
             detail: req.body.detail,
             starRating: req.body.starRating,
+            price: req.body.price,
             reviews: req.body.reviews,
             category: req.body.category,
             sizes: sizes,
