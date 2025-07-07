@@ -17,6 +17,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
 import AddProduct from './pages/admin/AddProduct';
 import ListProducts from './pages/admin/ListProducts';
+import UpdateProduct from './pages/admin/UpdateProduct';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path='add-product' element={<AddProduct />} />
           <Route path='all-products' element={<ListProducts />} />
+          <Route path='update-product/:id' element={<UpdateProduct />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />

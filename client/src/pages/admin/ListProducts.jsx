@@ -34,9 +34,9 @@ const ListProducts = () => {
         }
     };
 
-    const updateProduct = (productId) => {
-        navigate(`/update-product/${productId}`);
-    };
+    // const updateProduct = (productId) => {
+    //     navigate(`/admin/update-product/${productId}`);
+    // };
 
     useEffect(() => {
         fetchProducts();
@@ -82,7 +82,7 @@ const ListProducts = () => {
 
                                     <td className='py-3 px-4 border-t border-gray-300 text-sm text-center'>
                                         <button
-                                            onClick={() => updateProduct(product._id)}
+                                            onClick={() => navigate(`/admin/update-product/${product._id}`)}
                                             className="bg-green-400 hover:bg-green-500 text-white px-3 py-1 rounded mr-2"
                                         >
                                             Update

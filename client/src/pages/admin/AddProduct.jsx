@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Title from '../../components/Title';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const URl = import.meta.env.VITE_Node_Api_Url;
 
 const AddProduct = () => {
+    const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [inputs, setInputs] = useState({
         name: '',
@@ -34,17 +36,20 @@ const AddProduct = () => {
             formData.append('starRating', inputs.starRating);
             formData.append('reviews', inputs.reviews);
             formData.append('category', inputs.category);
-            formData.append('image', image); // Image file
-
-            // Append sizes
+            formData.append('image', image);
             formData.append('sizes', JSON.stringify(inputs.sizes));
 
             const response = await axios.post(`${URl}/products/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
-            toast.success(response.data.msg);
-            console.log(response.data);
+            toast.success(response.data.msg, {
+                onClose: () => {
+                    navigate('/admin/all-products');
+                },
+                autoClose:500
+            });
+
         } catch (error) {
             console.error(error);
             toast.error(error.response?.data?.msg || "Error adding product");
