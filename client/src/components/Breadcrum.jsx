@@ -2,7 +2,6 @@ import { ChevronRight } from 'lucide-react';
 import React from 'react';
 
 const Breadcrum = ({ product }) => {
-  console.log(product);
 
   if (!product) {
     return (

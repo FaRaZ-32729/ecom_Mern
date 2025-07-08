@@ -76,6 +76,7 @@ const AddProduct = () => {
                             type="file"
                             accept="image/*"
                             id="productImage"
+                            required
                             hidden
                             onChange={e => setImage(e.target.files[0])}
                         />
@@ -89,6 +90,7 @@ const AddProduct = () => {
                         type="text"
                         placeholder="Enter product name"
                         className="border border-gray-300 rounded p-2 w-full mt-1"
+                        required
                         value={inputs.name}
                         onChange={e => setInputs({ ...inputs, name: e.target.value })}
                     />
@@ -100,6 +102,7 @@ const AddProduct = () => {
                     <input
                         type="text"
                         placeholder="Enter a short description"
+                        required
                         className="border border-gray-300 rounded p-2 w-full mt-1"
                         value={inputs.smallDescription}
                         onChange={e => setInputs({ ...inputs, smallDescription: e.target.value })}
@@ -110,6 +113,7 @@ const AddProduct = () => {
                     <p className="text-gray-800">Price</p>
                     <input
                         type="number"
+                        required
                         placeholder="Enter product price"
                         className="border border-gray-300 rounded p-2 w-full mt-1"
                         value={inputs.price}
@@ -124,6 +128,7 @@ const AddProduct = () => {
                         rows={4}
                         placeholder="Enter detailed description"
                         className="border border-gray-300 rounded p-2 w-full mt-1"
+                        required
                         value={inputs.detail}
                         onChange={e => setInputs({ ...inputs, detail: e.target.value })}
                     ></textarea>
@@ -138,6 +143,7 @@ const AddProduct = () => {
                         max={5}
                         placeholder="0"
                         className="border border-gray-300 rounded p-2 w-24 mt-1"
+                        required
                         value={inputs.starRating}
                         onChange={e => setInputs({ ...inputs, starRating: e.target.value })}
                     />
@@ -149,6 +155,7 @@ const AddProduct = () => {
                     <input
                         type="number"
                         placeholder="0"
+                        required
                         className="border border-gray-300 rounded p-2 w-24 mt-1"
                         value={inputs.reviews}
                         onChange={e => setInputs({ ...inputs, reviews: e.target.value })}
@@ -161,6 +168,7 @@ const AddProduct = () => {
                     <input
                         type="text"
                         placeholder="e.g., Men, Women, Kids"
+                        required
                         className="border border-gray-300 rounded p-2 w-full mt-1"
                         value={inputs.category}
                         onChange={e => setInputs({ ...inputs, category: e.target.value })}

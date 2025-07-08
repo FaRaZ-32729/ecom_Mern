@@ -17,11 +17,11 @@ const ProductDisplay = (props) => {
 
     const handleAddToCart = () => {
         if (!user || !user.name) {
-            navigate('/login'); // Redirect to login if user not found
+            navigate('/login');
             return;
         }
         addToCart(product._id);
-        navigate('/cart'); // Navigate to cart after adding
+        navigate('/cart');
     };
 
     return (

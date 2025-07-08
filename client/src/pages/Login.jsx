@@ -30,19 +30,38 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${URL}/auth`, loginData, { withCredentials: true });
-      toast.success(response.data.msg, {
-        onClose: () => {
-          response.data.existingUser.role === "admin" ? navigate("/admin") : navigate("/");
-        },
-        autoClose: 500
-      });
-      setUser(response.data.existingUser)
-      console.log(response);
+      const user = response.data.existingUser;
+      if (!user.isActive) {
+        setUser("");
+        toast.error("Your account is deactivated", {
+          onClose: () => {
+            navigate("/")
+          },
+          autoClose: 500
+        });
+
+
+
+        return;
+      }
+
+
+      // If active user
+      toast.success(response.data.msg);
+      setUser(user);
+
+      if (user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+
     } catch (error) {
       console.log(error.message);
-      toast.error(error.response.data.msg)
+      toast.error(error.response?.data?.msg || "Login failed");
     }
-  }
+  };
+
 
 
   return (

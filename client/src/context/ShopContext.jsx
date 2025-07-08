@@ -9,7 +9,7 @@ const ShopContextProvider = (props) => {
     const [newCollections, setNewCollections] = useState([]);
     const [cartItems, setCartItems] = useState({});
 
-    // Fetch Products From API
+    // Fetch Products From DB
     const fetchProducts = async () => {
         try {
             const res = await axios.get(`${URL}/products`);

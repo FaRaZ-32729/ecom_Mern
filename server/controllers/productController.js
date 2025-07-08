@@ -98,7 +98,6 @@ export const deleteProduct = async (req, res) => {
         const product = await productModel.findById(_id);
         if (!product) return res.status(404).json({ msg: "Product Not Found" });
 
-        // Delete the image file
         if (product.imageUrl) {
             const imagePath = path.join(__dirname, "..", product.imageUrl);
             if (fs.existsSync(imagePath)) {

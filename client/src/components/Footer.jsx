@@ -30,29 +30,29 @@ const Footer = () => {
                 <div className="mb-6 md:mb-0">
                     <h3 className=" text-xl font-semibold">Follow Us</h3>
                     <div className="flex space-x-4 mt-2">
-                        <FaFacebook/>
-                        <FaInstagram/>
-                        <FaTwitterSquare/>
-                        <FaPinterest/>
+                        <FaFacebook />
+                        <FaInstagram />
+                        <FaTwitterSquare />
+                        <FaPinterest />
                     </div>
                 </div>
                 {/* Subscriptions */}
                 <div>
-                <h3 className=" text-xl font-semibold">Stay in the Loop</h3>
-                <p className="mt-2 text-sm "> Subscribe to get Special Offer, Free giveways and more</p>
-                <form action="" className='mt-4 flex' >
-                    <input type="email" placeholder='Your Email' className='w-full p-2 rounded-l-md bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-50 ' />
-                    <button type='submit' className='bg-red-600 text-white px-4 rounded-r-md hover:bg-red-700' >Subscribe</button>
-                </form>
+                    <h3 className=" text-xl font-semibold">Stay in the Loop</h3>
+                    <p className="mt-2 text-sm "> Subscribe to get Special Offer, Free giveways and more</p>
+                    <form action="" className='mt-4 flex' >
+                        <input type="email" placeholder='Your Email' className='w-full p-2 rounded-l-md bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-50 ' />
+                        <button type='submit' className='bg-red-600 text-white px-4 rounded-r-md hover:bg-red-700' >Subscribe</button>
+                    </form>
                 </div>
             </div>
             {/* bottom */}
             <div className="mt-8 border-t border-gray-700 pt-6 text-center text-sm ">
-                <p> &copy; {new Date().getFullYear()} <span className='text-red-500' >FaRaZ</span>.All rights reserved </p>
+                <p> &copy; {new Date().getFullYear()} <span className='text-red-500' ></span>All rights reserved </p>
             </div>
         </footer>
 
-        
+
 
     )
 }
