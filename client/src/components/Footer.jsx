@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             {/* bottom */}
             <div className="mt-8 border-t border-gray-700 pt-6 text-center text-sm ">
-                <p> &copy; {new Date().getFullYear()} <span className='text-red-500' ></span>All rights reserved </p>
+                <p> &copy; {new Date().getFullYear()} Designed & Developed By  <span className='text-red-500' >FaRaZ.</span></p>
             </div>
         </footer>
 

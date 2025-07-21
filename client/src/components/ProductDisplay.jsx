@@ -41,8 +41,8 @@ const ProductDisplay = (props) => {
                 </div>
 
                 <div className="flex gap-5 font-semibold items-center my-5">
-                    <div className="text-gray-500 text-2xl line-through ">${product.old_price || (product.price + 20)}</div>
-                    <div className="text-red-500 text-3xl ">${product.new_price || product.price}</div>
+                    <div className="text-gray-500 text-2xl line-through ">${product.price + 20}</div>
+                    <div className="text-red-500 text-3xl ">${product.price}</div>
                 </div>
 
                 <div>{product.smallDescription}</div>
@@ -50,7 +50,7 @@ const ProductDisplay = (props) => {
                 <div>
                     <h1 className='font-semibold text-gray-400 text-2xl mt-4'>Select Size</h1>
                     <div className="flex gap-4 items-center my-4 ">
-                        {Object.keys(product.sizes || {}).map(size => (
+                        {Object.keys(product.sizes).map(size => (
                             product.sizes[size] && <div key={size} className="border bg-gray-100 p-4 ">{size}</div>
                         ))}
                     </div>
