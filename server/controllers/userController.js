@@ -83,7 +83,6 @@ export const deleteUser = async (req, res) => {
     }
 };
 
-// ✅ NEW: Toggle user active status
 export const updateUserStatus = async (req, res) => {
     try {
         const id = req.params.id;
