@@ -1,17 +1,17 @@
 import mongoose from "mongoose";
-import user from './userModel.js'
-import Product from './userModel.js'
+import {userModel} from './userModel.js'
+import {productModel} from './productModel.js'
 
 const cartItemSchema = mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "userModel",
       required: true,
     },
     productId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      ref: "productModel",
       required: true,
     },
     name: {

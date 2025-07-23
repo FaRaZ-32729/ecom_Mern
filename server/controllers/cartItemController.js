@@ -1,10 +1,11 @@
-import cartItemModel from '../models/cartItemModel.js'
+import { cartItemModel } from '../models/cartItemModel.js'
 
 export const addToCart = async (req, res) => {
     try {
         const { userId, productId, name, imageUrl, price, size, quantity } = req.body;
+        console.log(req.body)
 
-        const existingItem = await cartItemModel.findOnde({ userId, productId, size });
+        const existingItem = await cartItemModel.findOne({ userId, productId, size });
 
         if (existingItem) {
             existingItem.quantity += quantity || 1;
@@ -36,10 +37,11 @@ export const getCartItem = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        const cartitems = await cartItemModel.findOnde({ userId });
+        const cartitems = await cartItemModel.find({ userId });
         return res.status(200).json({ cartitems });
 
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ message: "Error Occured While Fetching The Card Item", error });
     }
 }
