@@ -1,28 +1,48 @@
 import { Star } from 'lucide-react';
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ShopContext } from '../context/ShopContext';
-import UserContext from '../context/UserContext'; // <-- Import UserContext
+import UserContext from '../context/UserContext';
+import { CartContext } from '../context/CartContext';
+import { useState } from 'react';
 const URL = import.meta.env.VITE_Node_Api_Url;
 
 const ProductDisplay = (props) => {
     const { product } = props;
-    const { addToCart } = useContext(ShopContext);
-    const { user } = useContext(UserContext); // <-- Access user
+    const { addToCart } = useContext(CartContext);
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
+    const [selectedSize, setSelectedSize] = useState("");
 
     if (!product) {
         return <p className="text-center mt-10">Product not found</p>;
     }
 
-    const handleAddToCart = () => {
-        if (!user || !user.name) {
+    const handleAddToCart = async () => {
+        if (!user) {
             navigate('/login');
             return;
         }
-        addToCart(product._id);
+
+        if (!selectedSize) {
+            alert("Please select a size.");
+            return;
+        }
+
+        await addToCart({
+            userId: user._id,
+            productId: product._id,
+            name: product.name,
+            imageUrl: product.imageUrl,
+            price: product.price,
+            size: selectedSize,
+            quantity: 1
+        });
+        // console.log(addToCart)
+
         navigate('/cart');
+        // console.log("added to cart successfully")
     };
+
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 my-20 md:gap-10 px-6 md:px-0'>
@@ -51,8 +71,18 @@ const ProductDisplay = (props) => {
                     <h1 className='font-semibold text-gray-400 text-2xl mt-4'>Select Size</h1>
                     <div className="flex gap-4 items-center my-4 ">
                         {Object.keys(product.sizes).map(size => (
-                            product.sizes[size] && <div key={size} className="border bg-gray-100 p-4 ">{size}</div>
+                            product.sizes[size] && (
+                                <div
+                                    key={size}
+                                    onClick={() => setSelectedSize(size)}
+                                    className={`border p-4 cursor-pointer ${selectedSize === size ? "bg-red-500 text-white" : "bg-gray-100"
+                                        }`}
+                                >
+                                    {size}
+                                </div>
+                            )
                         ))}
+
                     </div>
                 </div>
 
