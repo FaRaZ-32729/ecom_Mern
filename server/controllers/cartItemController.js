@@ -3,7 +3,6 @@ import { cartItemModel } from '../models/cartItemModel.js'
 export const addToCart = async (req, res) => {
     try {
         const { userId, productId, name, imageUrl, price, size, quantity } = req.body;
-        console.log(req.body)
 
         const existingItem = await cartItemModel.findOne({ userId, productId, size });
 
@@ -41,7 +40,6 @@ export const getCartItem = async (req, res) => {
         return res.status(200).json({ cartitems });
 
     } catch (error) {
-        console.log(error)
         return res.status(500).json({ message: "Error Occured While Fetching The Card Item", error });
     }
 }

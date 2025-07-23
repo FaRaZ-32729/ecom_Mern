@@ -5,8 +5,10 @@ import { HiMenuAlt1, HiMenuAlt3 } from 'react-icons/hi'
 import Menu from './Menu'
 import UserContext from '../../context/UserContext'
 import ShowConfirmationToast from '../ShowConfirmationToast'
+import { CartContext } from '../../context/CartContext'
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
+  const {cartItems} = useContext(CartContext);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const Navbar = () => {
           </nav>
           <NavLink to="/cart" className="relative w-10" >
             <ShoppingCart />
-            <div className="bg-red-500 w-5 absolute -top-2 right-1 flex items-center justify-center rounded-full text-white ">0</div>
+            <div className="bg-red-500 w-5 absolute -top-2 right-1 flex items-center justify-center rounded-full text-white ">{cartItems ?  cartItems.length : 0}</div>
           </NavLink>
           {
             showMenu ? (

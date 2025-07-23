@@ -6,17 +6,15 @@ const UserContextProvider = ({ children }) => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : "";
     });
-    console.log("main user",user)
 
     useEffect(() => {
         if (user && user.name) {
-            const { name, email , _id } = user;
-            localStorage.setItem("user", JSON.stringify({ name, email , _id}));
+            const { name, email, _id } = user;
+            localStorage.setItem("user", JSON.stringify({ name, email, _id }));
         } else {
             localStorage.removeItem("user");
         }
     }, [user]);
-    console.log("context api user ", user)
     return (
 
         <UserContext.Provider value={{ user, setUser }}>

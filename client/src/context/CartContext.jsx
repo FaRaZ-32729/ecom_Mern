@@ -1,14 +1,21 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import UserContext from "./UserContext";
 
 const URL = import.meta.env.VITE_Node_Api_Url;
 
 export const CartContext = createContext();
 
 export const CartContextProvider = ({ children }) => {
+    const { user } = useContext(UserContext)
     const [cartItems, setCartItems] = useState([]);
+    console.log("cart item length", cartItems.length)
 
     const fetchCart = async (userId) => {
+        if (!userId) {
+            setCartItems([]);
+            return;
+        }
         try {
             const { data } = await axios.get(`${URL}/cart/${userId}`);
             setCartItems(data.cartitems);
@@ -16,6 +23,14 @@ export const CartContextProvider = ({ children }) => {
             console.error("Error fetching cart:", error);
         }
     };
+
+    useEffect(() => {
+        if (user?._id) {
+            fetchCart(user._id);
+        } else {
+            setCartItems([]); 
+        }
+    }, [user]);
 
     const addToCart = async (item) => {
         try {
