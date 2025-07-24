@@ -8,7 +8,7 @@ import ShowConfirmationToast from '../ShowConfirmationToast'
 import { CartContext } from '../../context/CartContext'
 const Navbar = () => {
   const { user, setUser } = useContext(UserContext);
-  const {cartItems} = useContext(CartContext);
+  const { cartItems } = useContext(CartContext);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
@@ -28,6 +28,7 @@ const Navbar = () => {
               <NavLink to="/men" ><li>Men</li></NavLink>
               <NavLink to="/women" ><li>Women</li></NavLink>
               <NavLink to="/kids" ><li>Kids</li></NavLink>
+              <NavLink to="/all-products" ><li>All-Products</li></NavLink>
               <button onClick={() => user ? ShowConfirmationToast(setUser, navigate) : navigate("/login")} className="bg-red-500 flex items-center  gap-2 text-white px-4 py-1 rounded-md ">
                 {user ? user.name : "login"}
                 {
@@ -40,7 +41,7 @@ const Navbar = () => {
           </nav>
           <NavLink to="/cart" className="relative w-10" >
             <ShoppingCart />
-            <div className="bg-red-500 w-5 absolute -top-2 right-1 flex items-center justify-center rounded-full text-white ">{cartItems ?  cartItems.length : 0}</div>
+            <div className="bg-red-500 w-5 absolute -top-2 right-1 flex items-center justify-center rounded-full text-white ">{cartItems ? cartItems.length : 0}</div>
           </NavLink>
           {
             showMenu ? (

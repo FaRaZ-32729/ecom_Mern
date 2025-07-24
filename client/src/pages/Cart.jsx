@@ -7,7 +7,7 @@ import UserContext from '../context/UserContext';
 const URL = import.meta.env.VITE_Node_Api_Url;
 
 const Cart = () => {
-  const { cartItems, removeFromCart, fetchCart, updateCartItem } = useContext(CartContext);
+  const { cartItems, removeFromCart, updateCartItem } = useContext(CartContext);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -21,11 +21,12 @@ const Cart = () => {
   const getTotalAmount = () => {
     const totalAmount = cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
     return totalAmount.toFixed(2);
-  }
+  };
 
   const handleQuantity = (id, newQuantity) => {
     updateCartItem(id, { quantity: newQuantity }, user._id);
   };
+
   return (
     <div className='mt-32'>
       <div className="max-w-7xl mx-auto my-10 p-4">

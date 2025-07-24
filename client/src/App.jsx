@@ -18,6 +18,7 @@ import Dashboard from './pages/admin/Dashboard';
 import AddProduct from './pages/admin/AddProduct';
 import ListProducts from './pages/admin/ListProducts';
 import UpdateProduct from './pages/admin/UpdateProduct';
+import AllProducts from './pages/AllProducts';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route path='/' element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="men" element={<Men />} />
+          <Route path="all-products" element={<AllProducts />} />
           <Route path="women" element={<Women />} />
           <Route path="kids" element={<Kids />} />
           <Route path="cart" element={<Cart />} />
