@@ -25,22 +25,73 @@ const RadioButton = ({ label, selected = false, onChange = () => { } }) => {
 
 // Main Component
 const AllProducts = () => {
-    const roomTypes = ["Single Bed", "Double Bed", "Luxury Room", "Family Room"];
-    const priceRange = ["0 to 500", "500 to 1000", "1000 to 2000", "2000 to 3000"];
-    const sortOptions = ["Price Low To High", "Price High To Low", "Newest First"];
+    const categories = ["Kids", "Men", "Women"];
+    const priceRange = ["0 to 100", "100 to 300", "300 to 500" , "500 to 1000"];
+    const sortOptions = ["Price Low To High", "Price High To Low"];
+    const [selectedCategory, setSelectedCategory] = useState([]);
+    const [selectPriceRange, setSelectedPriceRange] = useState([]);
+    const [selectedSortOptions, setSelectedSortOptions] = useState("");
 
     const navigate = useNavigate();
     const [openFilter, setOpenFilter] = useState(false);
     const { newCollections } = useContext(ShopContext);
 
+
+    const handleCategoryChange = (checked, label) => {
+        scrollTo(0, 0);
+        const lowerCaseLabel = label.toLowerCase();
+        setSelectedCategory(prev =>
+            checked ? [...prev, lowerCaseLabel] : prev.filter(cat => cat !== lowerCaseLabel)
+        );
+    }
+
+    const handlePriceChange = (checked, label) => {
+        scrollTo(0, 0);
+        const range = label.replace('$ ', '');
+        setSelectedPriceRange(prev =>
+            checked ? [...prev, range] : prev.filter(r => r !== range)
+        );
+    };
+
+    const handleSortChange = (option) => {
+        scrollTo(0, 0);
+        setSelectedSortOptions(option);
+    };
+
+    const filteredProducts = newCollections
+        .filter(item => {
+            if (selectedCategory.length > 0 && !selectedCategory.includes(item.category)) {
+                return false;
+            }
+
+            if (selectPriceRange.length > 0) {
+                const priceMatch = selectPriceRange.some(range => {
+                    const [min, max] = range.split(' to ').map(Number);
+                    return item.price >= min && item.price <= max;
+                });
+                if (!priceMatch) return false;
+            }
+
+            return true;
+        })
+        .sort((a, b) => {
+            if (selectedSortOptions === "Price Low To High") {
+                return a.price - b.price;
+            } else if (selectedSortOptions === "Price High To Low") {
+                return b.price - a.price;
+            }
+            return 0;
+        });
+
+
     return (
         <div className='flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-35 px-4 md:px-16 lg:px-24 xl:px-32'>
             <div className='max-w-7xl max-auto'>
-                <h1 className='playFairFont text-4xl md:text-[40px]'>All Clothes</h1>
+                <h1 className=' text-4xl md:text-[40px]'>All Clothes</h1>
                 <div className="auto-max max-w-2xl px-4 py-16 sm:pt-24 lg:max-w-7xl lg:px-8 ">
                     <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 px-6 md:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                         {
-                            newCollections.map((item) => (
+                            filteredProducts.map((item) => (
                                 <Product key={item.id} item={item} />
                             ))
                         }
@@ -60,29 +111,38 @@ const AllProducts = () => {
                 <div className={`${openFilter ? "h-auto" : "h-0 lg:h-auto"} overflow-hidden transition-all duration-700`}>
                     <div className="px-5 pt-5">
                         <p className='font-medium text-gray-800 pb-2'>Popular Filters</p>
-                        {
-                            roomTypes.map((room, index) => (
-                                <CheckBox key={index} label={room} />
-                            ))
-                        }
+                        {categories.map((category, index) => (
+                            <CheckBox
+                                key={index}
+                                label={category}
+                                selected={selectedCategory.includes(category.toLowerCase())}
+                                onChange={handleCategoryChange}
+                            />
+                        ))}
                     </div>
 
                     <div className="px-5 pt-5">
                         <p className='font-medium text-gray-800 pb-2'>Price Range</p>
-                        {
-                            priceRange.map((range, index) => (
-                                <CheckBox key={index} label={`$ ${range}`} />
-                            ))
-                        }
+                        {priceRange.map((range, index) => (
+                            <CheckBox
+                                key={index}
+                                label={`$ ${range}`}
+                                selected={selectPriceRange.includes(range)}
+                                onChange={handlePriceChange}
+                            />
+                        ))}
                     </div>
 
                     <div className="px-5 pt-5 pb-7">
                         <p className='font-medium text-gray-800 pb-2'>Sort By</p>
-                        {
-                            sortOptions.map((option, index) => (
-                                <RadioButton key={index} label={option} />
-                            ))
-                        }
+                        {sortOptions.map((option, index) => (
+                            <RadioButton
+                                key={index}
+                                label={option}
+                                selected={selectedSortOptions === option}
+                                onChange={handleSortChange}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
