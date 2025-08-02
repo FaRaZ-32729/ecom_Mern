@@ -75,7 +75,6 @@ export const deleteFromCart = async (req, res) => {
         const { userId } = req.params;
         await cartItemModel.deleteMany({ userId });
         res.status(200).json({ message: 'Cart cleared' });
-        console.log(cartItemModel)
     } catch (error) {
         console.error("Clear cart error:", error);
         res.status(500).json({ error: 'Internal server error' });

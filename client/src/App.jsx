@@ -20,6 +20,8 @@ import ListProducts from './pages/admin/ListProducts';
 import UpdateProduct from './pages/admin/UpdateProduct';
 import AllProducts from './pages/AllProducts';
 import Success from './pages/Success';
+import AdminRoutes from './components/admin/AdminRoutes';
+import ProtectedRoutes from './components/ProtectedRoutes';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -35,15 +37,19 @@ const App = () => {
           <Route path="all-products" element={<AllProducts />} />
           <Route path="women" element={<Women />} />
           <Route path="kids" element={<Kids />} />
-          <Route path="cart" element={<Cart />} />
           <Route path="product/:productId" element={<DetailPage />} />
-          <Route path="/success" element={<Success />} />
+          <Route path="success" element={<Success />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="cart" element={<Cart />} />
+          </Route>
         </Route>
-        <Route path='/admin' element={<AdminLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path='add-product' element={<AddProduct />} />
-          <Route path='all-products' element={<ListProducts />} />
-          <Route path='update-product/:id' element={<UpdateProduct />} />
+        <Route path='/admin' element={<AdminRoutes />}>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path='add-product' element={<AddProduct />} />
+            <Route path='all-products' element={<ListProducts />} />
+            <Route path='update-product/:id' element={<UpdateProduct />} />
+          </Route>
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
