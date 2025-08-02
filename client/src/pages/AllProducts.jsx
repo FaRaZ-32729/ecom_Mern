@@ -105,7 +105,7 @@ const AllProducts = () => {
                     <p className='text-base font-medium text-gray-800'>Filter</p>
                     <div className='text-xs cursor-pointer'>
                         <span onClick={() => setOpenFilter(!openFilter)} className='lg:hidden'>{openFilter ? "Hide" : "Show"}</span>
-                        <span className='hidden lg:block'>Clear</span>
+                        {/* <span className='hidden lg:block'>Clear</span> */}
                     </div>
                 </div>
                 <div className={`${openFilter ? "h-auto" : "h-0 lg:h-auto"} overflow-hidden transition-all duration-700`}>

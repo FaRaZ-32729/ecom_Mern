@@ -3,11 +3,13 @@ import authRouter from './routes/authRoute.js'
 import productRouter from './routes/productRoute.js'
 import cartRouter from './routes/cartRoute.js'
 import profile from './routes/protectedRoute.js'
+import stripeRouter from './routes/stripeRoute.js'
 import cors from 'cors'
 import express from "express";
 import cookieparser from 'cookie-parser'
-import "dotenv/config";
+import dotenv from 'dotenv';
 import db_Connection from "./db_Connection_String/db_Connection.js";
+dotenv.config();
 
 
 
@@ -31,6 +33,7 @@ app.use("/auth", authRouter);
 app.use("/products", productRouter);
 app.use("/api", profile);
 app.use("/cart", cartRouter);
+app.use("/stripe", stripeRouter);
 
 
 //prot

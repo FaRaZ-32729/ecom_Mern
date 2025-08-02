@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import UserContext from '../context/UserContext';
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISH_KEY);
 
 const URL = import.meta.env.VITE_Node_Api_Url;
 
@@ -25,6 +27,35 @@ const Cart = () => {
 
   const handleQuantity = (id, newQuantity) => {
     updateCartItem(id, { quantity: newQuantity }, user._id);
+  };
+
+
+
+
+  const handleCheckout = async () => {
+    try {
+      const response = await axios.post(
+        `${URL}/stripe/checkout`,
+        { cartItems },
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      const { id } = response.data;
+
+      if (id) {
+        const stripe = await stripePromise;
+        await stripe.redirectToCheckout({ sessionId: id });
+      } else {
+        console.error("Stripe session not created:", data);
+      }
+    } catch (error) {
+      console.error("Stripe checkout error:", error);
+    }
   };
 
   return (
@@ -99,11 +130,18 @@ const Cart = () => {
                     <h3>${getTotalAmount()}</h3>
                   </div>
                 </div>
-                <NavLink to="/cart">
+                <button
+                  onClick={handleCheckout}
+                  className='w-full lg:w-64 h-14 bg-red-500 text-white font-semibold text-lg'
+                >
+                  Proceed To Checkout
+                </button>
+
+                {/* <NavLink to="/cart">
                   <button className='w-full lg:w-64 h-14 bg-red-500 text-white font-semibold text-lg'>
                     Proceed To Checkout
                   </button>
-                </NavLink>
+                </NavLink> */}
               </div>
 
               <div className="flex-1 w-full text-lg font-semibold">
