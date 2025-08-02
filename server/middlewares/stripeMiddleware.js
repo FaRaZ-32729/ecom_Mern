@@ -23,8 +23,8 @@ export const paymentApi = async (req, res) => {
                 },
                 quantity: item.quantity,
             })),
-               success_url: 'http://localhost:5173/?payment=success',
-               cancel_url: 'http://localhost:5173/cancel/?payment=cancel',
+               success_url: 'http://localhost:5173/success',
+               cancel_url: 'http://localhost:5173/cancel',
         });
 
         res.send({ id: session.id });

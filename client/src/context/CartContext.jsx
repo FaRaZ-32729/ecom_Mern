@@ -28,7 +28,7 @@ export const CartContextProvider = ({ children }) => {
         if (user?._id) {
             fetchCart(user._id);
         } else {
-            setCartItems([]); 
+            setCartItems([]);
         }
     }, [user]);
 
@@ -59,13 +59,27 @@ export const CartContextProvider = ({ children }) => {
         }
     };
 
+
+    const clearCart = async (userId) => {
+        try {
+            await axios.delete(`${URL}/cart/clear/${userId}`, {
+                withCredentials: true,
+            });
+            setCartItems([]);
+        } catch (error) {
+            console.error("Failed to clear cart:", error);
+        }
+    };
+
+
     return (
         <CartContext.Provider value={{
             cartItems,
             fetchCart,
             addToCart,
             updateCartItem,
-            removeFromCart
+            removeFromCart,
+            clearCart
         }}>
             {children}
         </CartContext.Provider>

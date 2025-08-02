@@ -19,6 +19,7 @@ import AddProduct from './pages/admin/AddProduct';
 import ListProducts from './pages/admin/ListProducts';
 import UpdateProduct from './pages/admin/UpdateProduct';
 import AllProducts from './pages/AllProducts';
+import Success from './pages/Success';
 // import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="kids" element={<Kids />} />
           <Route path="cart" element={<Cart />} />
           <Route path="product/:productId" element={<DetailPage />} />
+          <Route path="/success" element={<Success />} />
         </Route>
         <Route path='/admin' element={<AdminLayout />}>
           <Route index element={<Dashboard />} />
